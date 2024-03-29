@@ -27,6 +27,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) =>{
     .pagination(resultPerPage);
 
     const products = await apiFeature.query;
+    // const products = await Product.find();
     res.status(200).json({message : "Routes is working fine", products});
 });
 
