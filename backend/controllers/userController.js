@@ -42,19 +42,13 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     if(!user){
         return next (new ErrorHandler("Invalid email or password", 401));
     }
-    const isPasswordMatched =  user.comparePassword();
+    const isPasswordMatched =  user.comparePassword(password);
 
     if(!isPasswordMatched){
         return next (new ErrorHandler("Invalid email or password", 401));
     }
 
-    const token = user.getJWTToken();
-    
-    res.status(201).json({
-        sucess: true,
-        message: "User logged in successfully",
-        token
-    })
+    sendToken(user, 200, res);
 })
 
 // Logout user 

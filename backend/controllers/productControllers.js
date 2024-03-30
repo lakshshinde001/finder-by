@@ -6,6 +6,8 @@ const productModel = require('../models/productModel.js');
 
 // Create products -- admin
 exports.createProduct = catchAsyncErrors( async (req, res, next) =>{
+
+    req.body.user = req.user.id;
    
     const product = await Product.create(req.body);
     res.status(200).json({
@@ -27,7 +29,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) =>{
     .pagination(resultPerPage);
 
     const products = await apiFeature.query;
-    // const products = await Product.find();
+    console.log(products);
     res.status(200).json({message : "Routes is working fine", products});
 });
 
@@ -79,7 +81,7 @@ exports.getProductDetails = catchAsyncErrors( async (req, res, next) => {
         res.status(200).json({
             success : true,
             product,
-            productCount
+            
         })
 
    

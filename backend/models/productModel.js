@@ -1,4 +1,4 @@
-const { kMaxLength } = require('buffer');
+
 const mongoose = require('mongoose');
 const { type } = require('os');
 
@@ -61,6 +61,12 @@ const productSchema = new mongoose.Schema({
             }
         }
     ],
+    user:{
+        type: mongoose.Schema.ObjectId,
+        ref : "User",
+        required : true
+    },
+
     createdAt : {
         type : Date,
         default : Date.now
